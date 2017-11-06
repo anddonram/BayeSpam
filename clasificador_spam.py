@@ -79,14 +79,14 @@ class ClasificadorSpam():
 #==============================================================================  
 
     def prob_condicionada_spam(self,palabra):
-        return self.spam_words[palabra]/self.S if palabra in self.spam_words else 0
+        return 1.0*self.spam_words[palabra]/self.S if palabra in self.spam_words else 0.0
 #==============================================================================
 #   Probabilidad de que aparezca una palabra dado que es ham
 #   P(xw|y=no)
 #==============================================================================  
 
     def prob_condicionada_ham(self,palabra):
-        return self.ham_words[palabra]/self.H if palabra in self.ham_words else 0
+        return 1.0*self.ham_words[palabra]/self.H if palabra in self.ham_words else 0.0
 #==============================================================================
 #   Por revisar
 #   Probabilidad de que aparezca una palabra dado que es spam
@@ -95,7 +95,7 @@ class ClasificadorSpam():
 #==============================================================================  
 
     def prob_condicionada_spam_suavizada(self,palabra):
-        return (self.spam_words[palabra]+1)/(self.S+2) if palabra in self.spam_words else 1/(self.S+2)
+        return 1.0*(self.spam_words[palabra]+1)/(self.S+2) if palabra in self.spam_words else 1.0/(self.S+2)
 #==============================================================================
 #   Por revisar
 #   Probabilidad de que aparezca una palabra dado que es ham
@@ -104,20 +104,20 @@ class ClasificadorSpam():
 #==============================================================================  
 
     def prob_condicionada_ham_suavizada(self,palabra):
-        return (self.ham_words[palabra]+1)/(self.H+2) if palabra in self.ham_words else 1/(self.H+2)
+        return 1.0*(self.ham_words[palabra]+1)/(self.H+2) if palabra in self.ham_words else 1.0/(self.H+2)
 #==============================================================================
 #   Probabilidad de spam del conjunto de entrenamiento
 #   P(y=si)
 #==============================================================================  
         
     def prob_spam(self):
-        return self.S/(self.S+self.H)
+        return 1.0*self.S/(self.S+self.H)
 #==============================================================================
 #   Probabilidad de ham del conjunto de entrenamiento
 #   P(y=no)
 #==============================================================================  
     def prob_ham(self):
-        return self.H/(self.S+self.H)
+        return 1.0*self.H/(self.S+self.H)
 
 #==============================================================================
 #   Probabilidad de spam condicionado a que esté la palabra
